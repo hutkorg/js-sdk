@@ -38,7 +38,7 @@ git clone git@github.com:hutkorg/js-sdk.git
 ## Quick start
 
 ```html
-<script src="https://unpkg.com/@hutko/js-sdk"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hutko/js-sdk"></script>
 ```
 
 ## Basic template
@@ -51,7 +51,7 @@ git clone git@github.com:hutkorg/js-sdk.git
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
   <body>
-    <script src="https://unpkg.com/@hutko/js-sdk"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hutko/js-sdk"></script>
     <script>
     $checkout('Api').scope(function(){
         this.request('api.checkout.form','request', { Parameters } ).done(function(model){
@@ -76,7 +76,7 @@ git clone git@github.com:hutkorg/js-sdk.git
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   </head>
   <body>
-    <script src="https://unpkg.com/@hutko/js-sdk"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@hutko/js-sdk"></script>
     <div class="payment-button-container"></div>
     <script>
     $checkout.get('PaymentButton', {
