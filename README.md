@@ -21,7 +21,7 @@ or add dependency manually:
 ```json
 {
   "dependency": {
-    "@hutko/js-sdk":"^1.2"
+    "@hutko/js-sdk":"^2.0"
   }
 }
 ```

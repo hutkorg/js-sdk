@@ -9,6 +9,7 @@ export const Api = Module.extend({
   defaults: {
     origin: ApiOrigin,
     endpoint: ApiEndpoint,
+    container: 'body',
     messages: {
       modalHeader:
         'Now you will be redirected to your bank 3DSecure. If you are not redirected please refer',
@@ -40,11 +41,19 @@ export const Api = Module.extend({
   },
   scope(callback) {
     callback = this.proxy(callback)
-    if (this.createFrame().loaded === true) {
-      callback()
-    } else {
-      this.on('checkout.api', callback)
-    }
+    this.domReady(function () {
+      if (this.createFrame().loaded === true) {
+        callback()
+      } else {
+        this.on('checkout.api', callback)
+      }
+    })
+  },
+  domReady(callback) {
+    callback = this.proxy(callback)
+    document.readyState !== 'loading'
+      ? callback()
+      : window.addEventListener('DOMContentLoaded', callback)
   },
   request(model, method, params) {
     const defer = Deferred()
@@ -73,6 +82,7 @@ export const Api = Module.extend({
     )
     return defer
   },
+
   loadFrame(url) {
     this.iframe = this.utils.createElement('iframe')
     this.addAttr(this.iframe, {
@@ -82,11 +92,15 @@ export const Api = Module.extend({
     })
     this.addAttr(this.iframe, { src: url })
     this.addCss(this.iframe, ApiFrameCss)
-    this.body = this.utils.querySelector('body')
-    if (this.body.firstChild) {
-      this.body.insertBefore(this.iframe, this.body.firstChild)
+    this.container = this.utils.querySelector(this.params.container)
+    if (this.container) {
+      if (this.container.firstChild) {
+        this.container.insertBefore(this.iframe, this.container.firstChild)
+      } else {
+        this.container.appendChild(this.iframe)
+      }
     } else {
-      this.body.appendChild(this.iframe)
+      throw Error(`container element not found: querySelector("${this.params.container}")`)
     }
     return this.iframe
   },
@@ -108,7 +122,7 @@ export const Api = Module.extend({
       checkout: this,
       model: model,
     })
-    this.modal.on('close', this.proxy('_onCloseModal'))
+    this.modal.on('close', this.proxy('onCloseModal'))
   },
   onCloseModal(modal, data) {
     this.trigger('modal.close', modal, data)

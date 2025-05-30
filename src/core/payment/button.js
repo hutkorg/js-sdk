@@ -39,6 +39,12 @@ export const PaymentButton = Module.extend({
     this.initApi(params.api)
     this.initPaymentRequestApi()
     this.initElements()
+    this.initData()
+  },
+  initData() {
+    const data = this.params.data
+    if (!data.merchant_id) return
+    if ((!data.currency || !data.amount) && !data.token) return
     this.update()
   },
   initApi(api) {

@@ -164,7 +164,8 @@ export const PaymentRequestApi = PaymentRequestInterface.extend({
   },
   setPending(state) {
     this.pendingState = state
-    setTimeout(() => {
+    clearTimeout(this.pendingTimeoutEvent)
+    this.pendingTimeoutEvent = setTimeout(() => {
       this.trigger('pending', state)
     }, 100)
   },

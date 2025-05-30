@@ -51,7 +51,7 @@ export function Deferred() {
   const promise = {
     done(callback) {
       if (isFunction(callback)) {
-        if (status === REJECTED) {
+        if (status === RESOLVED) {
           callback.apply(resultContext, resultArgs)
         }
         resolveCallbacks.push(callback)

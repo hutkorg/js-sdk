@@ -3,9 +3,10 @@
   "description": "Checkout JavaScript SDK",
   "homepage": "https://github.com/hutkorg/js-sdk",
   "type": "module",
-  "version": "1.2.3",
+  "version": "2.0.5",
   "main": "dist/cjs/checkout.js",
   "module": "dist/esm/checkout.js",
+  "unpkg": "dist/umd/checkout.js",
   "browser": "dist/umd/checkout.js",
   "author": "Checkout JavaScript Team",
   "files": [
@@ -20,8 +21,8 @@
   "scripts": {
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest --collect-coverage",
     "jest": "node --experimental-vm-modules ./node_modules/.bin/jest --watch --collect-coverage",
-    "watch": "rollup -c -w",
-    "build": "rollup -c",
+    "watch": "./node_modules/.bin/rollup -c -w",
+    "build": "./node_modules/.bin/rollup -c",
     "preversion": "npm test",
     "prepublishOnly": "npm run build",
     "version": "npm run build",

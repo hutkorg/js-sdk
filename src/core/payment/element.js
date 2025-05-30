@@ -62,9 +62,7 @@ export const PaymentElement = Module.extend({
     this.element.appendChild(this.iframe)
     this.element.appendChild(this.button)
   },
-  errorConnector() {
-    log('frame load error')
-  },
+  errorConnector() {},
   onloadConnector() {
     this.connector = new Connector({
       target: this.iframe.contentWindow,
