@@ -13,6 +13,7 @@ const parseConfig = (config) => {
   const data = {
     payment_system: config.payment_system,
     provider: {},
+    allowed: [],
   }
   const methods = config.methods || []
   const details = config.details || {}
